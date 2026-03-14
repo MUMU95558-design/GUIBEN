@@ -30,7 +30,10 @@ export async function chat(messages: Array<{ role: string; content: string }>) {
 
   const response = await client.chat.completions.create({
     model: 'Pro/zai-org/GLM-5',
-    messages: [{ role: 'system', content: systemPrompt }, ...messages],
+    messages: [
+      { role: 'system' as const, content: systemPrompt },
+      ...messages.map(m => ({ role: m.role as 'user' | 'assistant', content: m.content }))
+    ],
     temperature: 0.7,
   });
 
