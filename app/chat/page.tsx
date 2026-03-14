@@ -92,26 +92,26 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F1ED] flex flex-col">
+    <div className="min-h-screen bg-[#FAF9F7] flex flex-col">
       {/* 顶部导航 */}
-      <div className="bg-white border-b border-gray-100 px-6 py-4">
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-gray-400 hover:text-gray-600 text-sm">
+      <div className="bg-white/80 backdrop-blur-sm border-b border-[#F0F0F0] px-6 py-5">
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <a href="/" className="text-[#8B8B8B] hover:text-[#2C2C2C] text-sm transition-colors">
             ← 返回
           </a>
-          <h1 className="text-sm font-medium text-gray-800">对话</h1>
-          <a href="/emotion" className="text-gray-400 hover:text-gray-600 text-sm">
+          <h1 className="text-sm font-medium text-[#2C2C2C] tracking-wide">对话</h1>
+          <a href="/emotion" className="text-[#8B8B8B] hover:text-[#2C2C2C] text-sm transition-colors">
             情绪轨迹
           </a>
         </div>
       </div>
 
       {/* 对话区域 */}
-      <div className="flex-1 overflow-y-auto px-6 py-8">
-        <div className="max-w-2xl mx-auto">
+      <div className="flex-1 overflow-y-auto px-6 py-12">
+        <div className="max-w-3xl mx-auto">
           {messages.length === 0 && (
-            <div className="text-center text-gray-400 mt-20">
-              <p className="text-sm">说说你的感受吧</p>
+            <div className="text-center mt-32">
+              <p className="text-[#BFBFBF] text-sm">说说你的感受吧</p>
             </div>
           )}
 
@@ -120,12 +120,12 @@ export default function ChatPage() {
           ))}
 
           {isLoading && (
-            <div className="flex justify-start mb-4">
-              <div className="max-w-[80%] px-4 py-3 rounded-2xl bg-white border border-gray-100">
-                <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="flex justify-start mb-6">
+              <div className="max-w-[75%] px-5 py-4 rounded-[20px] bg-white shadow-sm border border-[#F0F0F0]">
+                <div className="flex gap-1.5">
+                  <div className="w-2 h-2 bg-[#BFBFBF] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="w-2 h-2 bg-[#BFBFBF] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="w-2 h-2 bg-[#BFBFBF] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             </div>
@@ -144,8 +144,8 @@ export default function ChatPage() {
       </div>
 
       {/* 输入区域 */}
-      <div className="bg-white border-t border-gray-100 px-6 py-4">
-        <div className="max-w-2xl mx-auto flex gap-3">
+      <div className="bg-white/80 backdrop-blur-sm border-t border-[#F0F0F0] px-6 py-6">
+        <div className="max-w-3xl mx-auto flex gap-3">
           <input
             type="text"
             value={input}
@@ -153,12 +153,12 @@ export default function ChatPage() {
             onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
             placeholder="说说你的感受..."
             disabled={isLoading}
-            className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#A8B5C7] transition-colors disabled:opacity-50"
+            className="flex-1 px-5 py-4 bg-white border border-[#E8E8E8] rounded-full text-[15px] text-[#2C2C2C] placeholder-[#BFBFBF] focus:outline-none focus:border-[#2C2C2C] transition-all disabled:opacity-50"
           />
           <button
             onClick={handleSend}
             disabled={isLoading || !input.trim()}
-            className="px-6 py-3 bg-[#A8B5C7] text-white rounded-full hover:bg-[#96a3b5] transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-8 py-4 bg-[#2C2C2C] text-white rounded-full hover:bg-[#404040] transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
           >
             {isLoading ? '...' : '发送'}
           </button>
