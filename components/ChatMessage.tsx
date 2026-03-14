@@ -12,8 +12,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       <div
         className={`max-w-[75%] px-5 py-4 ${
           isUser
-            ? 'bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-2xl shadow-sm'
-            : 'bg-white text-gray-700 rounded-2xl shadow-sm border border-blue-100/50'
+            ? 'bg-[#FFF4ED] text-gray-800 rounded-2xl shadow-sm border border-orange-100/50'
+            : 'bg-[#EEF2FF] text-gray-800 rounded-2xl shadow-sm border border-indigo-100/50'
         }`}
       >
         <p className="text-[15px] leading-[1.7]">{message.content}</p>

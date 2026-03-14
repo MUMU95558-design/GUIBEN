@@ -129,11 +129,11 @@ export default function ChatPage() {
 
           {isLoading && (
             <div className="flex justify-start mb-6">
-              <div className="max-w-[75%] px-5 py-4 rounded-2xl bg-white shadow-sm border border-blue-100/50">
+              <div className="max-w-[75%] px-5 py-4 rounded-2xl bg-[#EEF2FF] shadow-sm border border-indigo-100/50">
                 <div className="flex gap-1.5">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function ChatPage() {
           <button
             onClick={handleSend}
             disabled={isLoading || !input.trim()}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-full hover:shadow-lg hover:shadow-blue-400/30 transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
+            className="px-8 py-4 bg-[#FF8A65] text-white rounded-full hover:shadow-lg hover:shadow-orange-400/30 transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
           >
             {isLoading ? '...' : '发送'}
           </button>
