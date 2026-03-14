@@ -92,15 +92,18 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7] flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50/50 via-blue-50/50 to-emerald-50/50 flex flex-col">
       {/* 顶部导航 */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-[#F0F0F0] px-6 py-5">
+      <div className="bg-white/70 backdrop-blur-md border-b border-blue-100/50 px-6 py-5">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-[#8B8B8B] hover:text-[#2C2C2C] text-sm transition-colors">
-            ← 返回
+          <a href="/" className="text-gray-500 hover:text-blue-600 text-sm transition-colors flex items-center gap-1">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            返回
           </a>
-          <h1 className="text-sm font-medium text-[#2C2C2C] tracking-wide">对话</h1>
-          <a href="/emotion" className="text-[#8B8B8B] hover:text-[#2C2C2C] text-sm transition-colors">
+          <h1 className="text-sm font-medium text-gray-700 tracking-wide">对话</h1>
+          <a href="/emotion" className="text-gray-500 hover:text-emerald-600 text-sm transition-colors">
             情绪轨迹
           </a>
         </div>
@@ -111,7 +114,12 @@ export default function ChatPage() {
         <div className="max-w-3xl mx-auto">
           {messages.length === 0 && (
             <div className="text-center mt-32">
-              <p className="text-[#BFBFBF] text-sm">说说你的感受吧</p>
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-emerald-100 rounded-2xl mb-4">
+                <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <p className="text-gray-400 text-sm">说说你的感受吧</p>
             </div>
           )}
 
@@ -121,11 +129,11 @@ export default function ChatPage() {
 
           {isLoading && (
             <div className="flex justify-start mb-6">
-              <div className="max-w-[75%] px-5 py-4 rounded-[20px] bg-white shadow-sm border border-[#F0F0F0]">
+              <div className="max-w-[75%] px-5 py-4 rounded-2xl bg-white shadow-sm border border-blue-100/50">
                 <div className="flex gap-1.5">
-                  <div className="w-2 h-2 bg-[#BFBFBF] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-2 h-2 bg-[#BFBFBF] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-2 h-2 bg-[#BFBFBF] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             </div>
@@ -144,7 +152,7 @@ export default function ChatPage() {
       </div>
 
       {/* 输入区域 */}
-      <div className="bg-white/80 backdrop-blur-sm border-t border-[#F0F0F0] px-6 py-6">
+      <div className="bg-white/70 backdrop-blur-md border-t border-blue-100/50 px-6 py-6">
         <div className="max-w-3xl mx-auto flex gap-3">
           <input
             type="text"
@@ -153,12 +161,12 @@ export default function ChatPage() {
             onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
             placeholder="说说你的感受..."
             disabled={isLoading}
-            className="flex-1 px-5 py-4 bg-white border border-[#E8E8E8] rounded-full text-[15px] text-[#2C2C2C] placeholder-[#BFBFBF] focus:outline-none focus:border-[#2C2C2C] transition-all disabled:opacity-50"
+            className="flex-1 px-5 py-4 bg-white border border-blue-200/50 rounded-full text-[15px] text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all disabled:opacity-50"
           />
           <button
             onClick={handleSend}
             disabled={isLoading || !input.trim()}
-            className="px-8 py-4 bg-[#2C2C2C] text-white rounded-full hover:bg-[#404040] transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-full hover:shadow-lg hover:shadow-blue-400/30 transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
           >
             {isLoading ? '...' : '发送'}
           </button>
