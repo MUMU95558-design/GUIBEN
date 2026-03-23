@@ -12,7 +12,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       <div
         className={`max-w-[75%] px-6 py-4 ${
           isUser
-            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-3xl rounded-tr-md shadow-lg shadow-blue-500/30'
+            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-3xl rounded-tr-md shadow-lg shadow-sky-400/30'
             : 'bg-white text-slate-700 rounded-3xl rounded-tl-md shadow-md border border-slate-200'
         }`}
       >
