@@ -33,8 +33,15 @@ export default function ChatPage() {
     setInput('');
     setIsLoading(true);
 
+    const assistantMessage: Message = {
+      role: 'assistant',
+      content: '',
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, assistantMessage]);
+
     try {
-      // 发送完整的对话历史
       const allMessages = [...messages, userMessage].map(m => ({
         role: m.role,
         content: m.content
@@ -46,38 +53,57 @@ export default function ChatPage() {
         body: JSON.stringify({ messages: allMessages }),
       });
 
-      const data = await response.json();
-
-      if (data.error) {
-        console.error('API Error:', data.error);
-        const errorMessage: Message = {
-          role: 'assistant',
-          content: '抱歉，我现在遇到了一些问题。请稍后再试。',
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, errorMessage]);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('API Error:', errorData.error);
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            ...updated[updated.length - 1],
+            content: '抱歉，我现在遇到了一些问题。请稍后再试。',
+          };
+          return updated;
+        });
         return;
       }
 
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: data.message || '抱歉，我没有收到回复。',
-        timestamp: new Date(),
-      };
-
-      setMessages((prev) => [...prev, assistantMessage]);
-
-      if (data.action) {
-        setCurrentAction(data.action);
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error('No response body');
       }
+
+      const decoder = new TextDecoder('utf-8');
+
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          break;
+        }
+
+        const chunk = decoder.decode(value, { stream: true });
+        
+        setMessages((prev) => {
+          const updated = [...prev];
+          const lastIndex = updated.length - 1;
+          updated[lastIndex] = {
+            ...updated[lastIndex],
+            content: updated[lastIndex].content + chunk,
+          };
+          return updated;
+        });
+      }
+
     } catch (error) {
       console.error('Error:', error);
-      const errorMessage: Message = {
-        role: 'assistant',
-        content: '抱歉，连接出现问题了。请检查网络后重试。',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          ...updated[updated.length - 1],
+          content: '抱歉，连接出现问题了。请检查网络后重试。',
+        };
+        return updated;
+      });
     } finally {
       setIsLoading(false);
     }
